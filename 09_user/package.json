@@ -1,5 +1,5 @@
 {
-  "name": "08_code_refactoring",
+  "name": "09_user",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "express": "^4.16.3",
     "mongoose": "^5.0.15"
   },
