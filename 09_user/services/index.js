@@ -1,6 +1,9 @@
 'use strict';
 
 const jwt = require('jwt-simple');
+const moment = require('moment');
+const config = require('../config');
+const service = require('../services')
 
 function createToken(user) {
     const payload = {
@@ -8,9 +11,10 @@ function createToken(user) {
         sub: user._id,
         // Van a ser unas determinadas fechas para indicar cuando fue creado el token y en que momento va a expirar 
         /* para ayudarnos con las fechas vamos a instalar moment desde npm */
-        iat:
-        exp: 
+        iat: moment().unix(),
+        exp: moment().add(14,'days').unix() // 14 para caducar
     }
+    return jwt.encode(payload, config.SECRET_TOKEN);
 }
 
 module.exports = createToken;
