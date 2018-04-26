@@ -14,7 +14,9 @@ function isAuth (req, res, next) {
         req.user = response;
         next();
     })
-    .catch();
+    .catch(response =>{
+        res.status(response.status)
+    });
 }
 
 module.exports = isAuth;
