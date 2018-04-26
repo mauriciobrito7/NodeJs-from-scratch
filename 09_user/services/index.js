@@ -17,4 +17,27 @@ function createToken(user) {
     return jwt.encode(payload, config.SECRET_TOKEN);
 }
 
+function decodeToken(token) {
+    /*Creamos la variable decoded que si resuelve tendrá el token decodifacado y si no se resulve tendrá un mensaje diferente */
+    const decoded = new Promise((resolve, reject)=>{
+        try{
+            const payload = jwt.decode(token, config.SECRET_TOKEN);
+            if (payload.exp <= moment().unix()){
+                reject({
+                    status: 401,
+                    message: 'El Token ha expirado'
+                });
+            }
+            resolve(payload.sub);
+        }catch(err){
+            reject({
+                status: 500,
+                message: 'Invalid Token'
+            });
+        }
+    });
+
+    return decoded;
+}
+
 module.exports = createToken;
